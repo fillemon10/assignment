@@ -1,8 +1,7 @@
 library(dagitty)
 library(ggdag)
-library(ggplot2) # Make sure ggplot2 is loaded for ggsave
+library(ggplot2)
 
-# Define the DAG
 smoking_ca_dag <- dagify(
   LUNG_CANCER ~ SMOKING + AGE,
   SMOKING ~ PEER_PRESSURE + ALCOHOL_CONSUMING + AGE,
@@ -27,9 +26,7 @@ smoking_ca_dag <- dagify(
   outcome = "LUNG_CANCER"
 )
 
-# Create the DAG plot
 dag_plot <- ggdag(smoking_ca_dag, text = FALSE, use_labels = "label") +
   theme_dag()
 
-# Save the DAG plot as a PNG file
 ggsave("smoking_ca_dag.png", dag_plot, width = 10, height = 10, dpi = 300)
